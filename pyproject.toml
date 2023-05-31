@@ -1,0 +1,49 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "simplelog"
+authors = [
+  { name="mikigo", email="1964191531@qq.com" },
+]
+description = "PaddleOCR-RPC"
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+]
+
+dependencies = [
+    "allure-pytest",
+]
+
+
+dynamic = ["version"]
+
+[project.optional-dependencies]
+#server = [
+#    "paddlepaddle",
+#    "paddleocr>=2.0.1"
+#]
+
+test = [
+    "pytest",
+]
+
+doc = ["mkdocs-material"]
+
+[tool.hatch.version]
+path = "simplelog/__version__.py"
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/simplelog",
+    "/README.md",
+]
+
+[project.urls]
+Source = "https://github.com/funny-test/simplelog"
+Documentation = "https://funny-test.github.io/simplelog"
