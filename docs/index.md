@@ -2,13 +2,15 @@
 
 一个简单易用、功能强大的日志工具。
 
+只需要加一个装饰器，就能自动日志输出类里面所有的方法的功能说明。
+
 ---
 
 **Documentation**: <a href="https://funny-test.github.io/funnylog" target="_blank">https://funny-test.github.io/funnylog</a>
 
 **Source Code**: <a href="https://github.com/funny-test/funnylog" target="_blank">https://github.com/funny-test/funnylog</a>
 
-
+---
 
 ## 安装
 
