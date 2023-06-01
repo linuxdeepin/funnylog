@@ -1,1 +1,82 @@
-site_name: My Docs
+site_name: funnylog
+copyright: Copyright © 2022-2023 Funny-Test. All Rights Reserved.
+theme:
+  name: material
+  language: zh
+#  # 评论系统
+#  custom_dir: overrides
+  palette:
+  # 自动亮/暗模式
+  - media: '(prefers-color-scheme: light)'
+    # 配色方案
+    scheme: default
+    # 原色
+    primary: teal
+    accent: amber
+    toggle:
+      icon: material/lightbulb
+      name: Switch to light mode
+  - media: '(prefers-color-scheme: dark)'
+    scheme: slate
+    primary: teal
+    accent: amber
+    toggle:
+      icon: material/lightbulb-outline
+      name: Switch to dark mode
+  features:
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+
+#  logo: "img/logo.png"
+#  favicon: img/favicon.ico
+  icon:
+    repo: fontawesome/brands/github
+
+# 右上角
+repo_name: funny-test/funnylog
+repo_url: "https://github.com/funny-test/funnylog"
+
+plugins:
+#  - termynal
+  - search
+#  - meta
+  - markdownextradata:
+      data: data
+
+nav:
+  - 首页: index.md
+
+
+markdown_extensions:
+- toc:
+    permalink: true
+- markdown.extensions.codehilite:
+    guess_lang: false
+- mdx_include:
+    base_path: docs
+- admonition
+- codehilite
+- extra
+- pymdownx.superfences:
+    custom_fences:
+    - name: mermaid
+      class: mermaid
+      format: !!python/name:pymdownx.superfences.fence_code_format ''
+- pymdownx.tabbed:
+    alternate_style: true
+- attr_list
+- md_in_html
+
+extra:
+  analytics:
+    provider: google
+#    property: G-YNEVN69SC3
+  generator: false
+
+extra_css:
+- /css/termynal.css
+- /css/custom.css
+extra_javascript:
+- /js/termynal.js
+- /js/custom.js

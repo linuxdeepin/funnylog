@@ -1,17 +1,24 @@
-# Welcome to MkDocs
+# FunnyLog
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+一个简单易用、功能强大的日志工具。
 
-## Commands
+---
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+**Documentation**: <a href="https://funny-test.github.io/funnylog" target="_blank">https://funny-test.github.io/funnylog</a>
 
-## Project layout
+**Source Code**: <a href="https://github.com/funny-test/funnylog" target="_blank">https://github.com/funny-test/funnylog</a>
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+
+
+## 安装
+
+```console
+pip install funnylog
+```
+
+## 使用方法
+
+```python
+{!../example.py!}
+```
+
