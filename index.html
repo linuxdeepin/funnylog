@@ -299,6 +299,40 @@
     使用方法
   </a>
   
+    <nav class="md-nav" aria-label="使用方法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1、自动输出日志
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2、方法中输出其他的日志
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3、在外层其他直接使用
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    必要配置项
+  </a>
+  
 </li>
       
     </ul>
@@ -347,6 +381,40 @@
     使用方法
   </a>
   
+    <nav class="md-nav" aria-label="使用方法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1、自动输出日志
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2、方法中输出其他的日志
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3、在外层其他直接使用
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    必要配置项
+  </a>
+  
 </li>
       
     </ul>
@@ -376,51 +444,154 @@
 <div class="highlight"><pre><span></span><code><span class="go">pip install funnylog</span>
 </code></pre></div>
 <h2 id="_2">使用方法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="1">1、自动输出日志<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">funnylog</span> <span class="kn">import</span> <span class="n">logger</span>
 <span class="kn">from</span> <span class="nn">funnylog</span> <span class="kn">import</span> <span class="n">log</span>
 <span class="kn">from</span> <span class="nn">funnylog.conf</span> <span class="kn">import</span> <span class="n">setting</span>
+
+<span class="n">setting</span><span class="o">.</span><span class="n">CLASS_NAME_ENDSWITH</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Log&quot;</span><span class="p">,)</span>
+<span class="n">logger</span><span class="p">(</span><span class="s2">&quot;DEBUG&quot;</span><span class="p">)</span>
 
 
 <span class="k">class</span> <span class="nc">BaseLog</span><span class="p">:</span>
 
     <span class="k">def</span> <span class="nf">base_self_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;我是基类里面的实例方法&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;我是 基类 里面的实例方法&quot;&quot;&quot;</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">base_cls_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;我是基类里面的类方法&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;我是 基类 里面的类方法&quot;&quot;&quot;</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">base_static_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;我是基类里面的静态方法&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">base_static_method</span><span class="p">():</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;我是 基类 里面的静态方法&quot;&quot;&quot;</span>
 
-
+<span class="c1"># 注意这里，只需要在这里挂一个装饰器</span>
 <span class="nd">@log</span>
 <span class="k">class</span> <span class="nc">TestLog</span><span class="p">(</span><span class="n">BaseLog</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;继承了基类BaseLog&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">self_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;我是类里面的实例方法&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;我是 类 里面的实例方法&quot;&quot;&quot;</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">cls_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;我是类里面的类方法&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;我是 类 里面的类方法&quot;&quot;&quot;</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">static_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;我是类里面的静态方法&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">static_method</span><span class="p">():</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;我是 类 里面的静态方法&quot;&quot;&quot;</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">logger</span><span class="p">(</span><span class="s2">&quot;DEBUG&quot;</span><span class="p">)</span>
-    <span class="c1"># logger.debug(&quot;这是 debug log&quot;)</span>
-    <span class="c1"># logger.info(&quot;这是 info log&quot;)</span>
-    <span class="c1"># logger.error(&quot;这是 is error log&quot;)</span>
-
-    <span class="n">setting</span><span class="o">.</span><span class="n">CLASS_NAME_ENDSWITH</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Log&quot;</span><span class="p">,)</span>
-
-    <span class="n">test</span> <span class="o">=</span> <span class="n">TestLog</span><span class="p">()</span>
-    <span class="n">test</span><span class="o">.</span><span class="n">self_method</span><span class="p">()</span>
+    <span class="c1"># @log装饰器自动打印</span>
+    <span class="n">TestLog</span><span class="p">()</span><span class="o">.</span><span class="n">self_method</span><span class="p">()</span>
+    <span class="n">TestLog</span><span class="p">()</span><span class="o">.</span><span class="n">cls_method</span><span class="p">()</span>
+    <span class="n">TestLog</span><span class="p">()</span><span class="o">.</span><span class="n">static_method</span><span class="p">()</span>
+    <span class="c1"># 直接调用基类里面的方法，也能自动打印</span>
+    <span class="n">TestLog</span><span class="p">()</span><span class="o">.</span><span class="n">base_self_method</span><span class="p">()</span>
+    <span class="n">TestLog</span><span class="p">()</span><span class="o">.</span><span class="n">base_cls_method</span><span class="p">()</span>
+    <span class="n">TestLog</span><span class="p">()</span><span class="o">.</span><span class="n">base_static_method</span><span class="p">()</span>
 </code></pre></div>
+<p>终端输出：</p>
+<p><img alt="" src="img/log.png" /></p>
+<h3 id="2">2、方法中输出其他的日志<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">funnylog</span> <span class="kn">import</span> <span class="n">logger</span>
+<span class="kn">from</span> <span class="nn">funnylog</span> <span class="kn">import</span> <span class="n">log</span>
+<span class="kn">from</span> <span class="nn">funnylog.conf</span> <span class="kn">import</span> <span class="n">setting</span>
+
+<span class="n">setting</span><span class="o">.</span><span class="n">CLASS_NAME_ENDSWITH</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Log&quot;</span><span class="p">,)</span>
+<span class="n">logger</span><span class="p">(</span><span class="s2">&quot;DEBUG&quot;</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">BaseLog</span><span class="p">:</span>
+    <span class="o">...</span>
+
+<span class="c1"># 注意这里，只需要在这里挂一个装饰器</span>
+<span class="nd">@log</span>
+<span class="k">class</span> <span class="nc">TestLog</span><span class="p">(</span><span class="n">BaseLog</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;继承了基类BaseLog&quot;&quot;&quot;</span>
+    <span class="o">...</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">static_method</span><span class="p">():</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;我是 类 里面的静态方法&quot;&quot;&quot;</span>
+
+        <span class="c1"># 方法里面仍然可以单独打印日志</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;这是我想再输出的其他 debug 日志&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;这是我想再输出的其他 info 日志&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;这是我想再输出的其他 error 日志&quot;</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="c1"># @log装饰器自动打印</span>
+    <span class="n">TestLog</span><span class="p">()</span><span class="o">.</span><span class="n">static_method</span><span class="p">()</span>
+</code></pre></div>
+<p>终端输出：</p>
+<p><img alt="" src="img/inside.png" /></p>
+<h3 id="3">3、在外层其他直接使用<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">funnylog</span> <span class="kn">import</span> <span class="n">logger</span>
+<span class="kn">from</span> <span class="nn">funnylog</span> <span class="kn">import</span> <span class="n">log</span>
+<span class="kn">from</span> <span class="nn">funnylog.conf</span> <span class="kn">import</span> <span class="n">setting</span>
+
+<span class="n">setting</span><span class="o">.</span><span class="n">CLASS_NAME_ENDSWITH</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Log&quot;</span><span class="p">,)</span>
+<span class="n">logger</span><span class="p">(</span><span class="s2">&quot;DEBUG&quot;</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">BaseLog</span><span class="p">:</span>
+    <span class="o">...</span>
+
+<span class="c1"># 注意这里，只需要在这里挂一个装饰器</span>
+<span class="nd">@log</span>
+<span class="k">class</span> <span class="nc">TestLog</span><span class="p">(</span><span class="n">BaseLog</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;继承了基类BaseLog&quot;&quot;&quot;</span>
+    <span class="o">...</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="c1"># logger直接调用</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;这是在类外面打 debug log&quot;</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;这是在类外面打 info log&quot;</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;这是在类外面打 error log&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>终端输出：</p>
+<p><img alt="" src="img/outside.png" /></p>
+<h2 id="_3">必要配置项<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>LOG_FILE_PATH</code> 日志文件的生成路径；</li>
+</ul>
+<p>默认是在：<code>/tmp/_logs</code>，你可以配置为其他位置；</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">funnylog.conf</span> <span class="kn">import</span> <span class="n">setting</span>
+
+<span class="n">setting</span><span class="o">.</span><span class="n">LOG_FILE_PATH</span> <span class="o">=</span> <span class="s2">&quot;/home/user/xxx&quot;</span>
+</code></pre></div>
+<ul>
+<li><code>LOG_LEVEL</code>日志级别；</li>
+</ul>
+<p>默认日志输出级别为 <code>DEBUG</code> 级别，同样可以进行配置修改；</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">funnylog.conf</span> <span class="kn">import</span> <span class="n">setting</span>
+
+<span class="n">setting</span><span class="o">.</span><span class="n">LOG_LEVEL</span> <span class="o">=</span> <span class="s2">&quot;INFO&quot;</span>
+</code></pre></div>
+<ul>
+<li>
+<p>自动输出日志的类名称；（tuple）</p>
+</li>
+<li>
+<p><code>CLASS_NAME_STARTSWITH</code> 类名以什么开头；</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">funnylog.conf</span> <span class="kn">import</span> <span class="n">setting</span>
+
+<span class="n">setting</span><span class="o">.</span><span class="n">CLASS_NAME_STARTSWITH</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Test&quot;</span><span class="p">,)</span> 
+<span class="c1"># 注意给元组类型</span>
+</code></pre></div>
+</li>
+<li>
+<p><code>CLASS_NAME_ENDSWITH</code> 类名以什么结尾；</p>
+</li>
+<li>
+<p><code>CLASS_NAME_CONTAIN</code> 类名包含什么字符；</p>
+</li>
+</ul>
 
 
   
