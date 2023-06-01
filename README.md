@@ -1,1 +1,1 @@
-# simplelog
+# funnylog

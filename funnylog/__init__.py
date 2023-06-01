@@ -17,7 +17,7 @@ try:
 except ModuleNotFoundError:
     ALLURE_STEP = False
 
-from simplelog.conf import setting
+from funnylog.conf import setting
 
 
 class Singleton(type):
@@ -79,6 +79,8 @@ def is_static_method(klass_or_instance, attr: str):
             return False
         return inspect.isfunction(value)
     return False
+
+
 def _trace(func):
     # pylint: disable=R0912
     @wraps(func)
@@ -86,20 +88,20 @@ def _trace(func):
         try:
             # 对象实例化后调用类方法报错处理
             if (
-                # pylint: disable=protected-access
-                isinstance(a[0], inspect._findclass(func))
-                and func.__name__ != "__init__"
+                    # pylint: disable=protected-access
+                    isinstance(a[0], inspect._findclass(func))
+                    and func.__name__ != "__init__"
             ):
                 if func:
                     if any(
-                        [
-                            inspect.ismethod(func),
-                            is_static_method(
-                                # pylint: disable=protected-access
-                                inspect._findclass(func),
-                                func.__name__,
-                            ),
-                        ]
+                            [
+                                inspect.ismethod(func),
+                                is_static_method(
+                                    # pylint: disable=protected-access
+                                    inspect._findclass(func),
+                                    func.__name__,
+                                ),
+                            ]
                     ):
                         a = list(a)[1:]
         except IndexError:
@@ -115,7 +117,7 @@ def _trace(func):
                 params_text = {}
                 # 获取方法的所有参数，并行程，{形参：实参} 的字典
                 for index, param in enumerate(
-                    inspect.signature(func).parameters.values()
+                        inspect.signature(func).parameters.values()
                 ):
                     if param.name == "self":
                         continue
@@ -152,7 +154,10 @@ def _trace(func):
                 return func(*a, **kw)
         else:
             return func(*a, **kw)
+
     return wrapped
+
+
 def log(cls):
     """
     类日志装饰器
@@ -160,7 +165,7 @@ def log(cls):
     :return:
     """
     for name, obj in inspect.getmembers(
-        cls, lambda x: inspect.isfunction(x) or inspect.ismethod(x)
+            cls, lambda x: inspect.isfunction(x) or inspect.ismethod(x)
     ):
         try:
             class_name = obj.__qualname__.split(".")[0]
@@ -170,11 +175,11 @@ def log(cls):
             continue
         # else:
         if (
-            class_name.startswith(setting.CLASS_NAME_STARTSWITH)
-            or class_name.endswith(setting.CLASS_NAME_ENDSWITH)
-            or any(
-                (class_name.find(text) > -1 for text in setting.CLASS_NAME_CONTAIN)
-            )
+                class_name.startswith(setting.CLASS_NAME_STARTSWITH)
+                or class_name.endswith(setting.CLASS_NAME_ENDSWITH)
+                or any(
+            (class_name.find(text) > -1 for text in setting.CLASS_NAME_CONTAIN)
+        )
         ):
             if hasattr(getattr(cls, name), "__log"):
                 if not getattr(cls, name).__log:
@@ -184,6 +189,8 @@ def log(cls):
                 setattr(cls, name, _trace(obj))
                 setattr(getattr(cls, name), "__log", True)
     return cls
+
+
 class _ColoredFormatter(logging.Formatter):
     def formatMessage(self, record: logging.LogRecord) -> str:
         """Format a message from a record object."""
@@ -215,15 +222,21 @@ class _ColoredFormatter(logging.Formatter):
             )
         message = super().formatMessage(record)
         return message
+
+
 # pylint: disable=R0903
 class IgnoreFilter(logging.Filter):
     """IgnoreFilter"""
+
     def filter(self, record):
         return record.name not in ("PIL.PngImagePlugin", "easyprocess")
+
+
 # pylint: disable=invalid-name
 class logger(metaclass=Singleton):
     """logger"""
     __author__ = "Litao <litaoa@uniontech.com>"
+
     def __init__(self, level):
         """
         日志配置
@@ -231,14 +244,14 @@ class logger(metaclass=Singleton):
         """
         # 清空其他日志配置
         logging.root.handlers = []
-        log_path = os.path.join(setting.REPORT_PATH, "logs")
+        log_path = os.path.join(setting.LOG_PATH, "logs")
         if not os.path.exists(log_path):
             os.makedirs(log_path)
         log_path_debug = (
-            log_path + rf'/{time.strftime("%Y-%m-%d", time.localtime())}_debug.log'
+                log_path + rf'/{time.strftime("%Y-%m-%d", time.localtime())}_debug.log'
         )  # debug级别日志路径
         logfile_error = (
-            log_path + rf'/{time.strftime("%Y-%m-%d", time.localtime())}_error.log'
+                log_path + rf'/{time.strftime("%Y-%m-%d", time.localtime())}_error.log'
         )  # error级别日志路径
         # 路径不存在则创建
         if os.path.exists(log_path_debug):
@@ -294,8 +307,8 @@ class logger(metaclass=Singleton):
         # 第五步，定义handler的输出格式
         formatter = _ColoredFormatter(
             (
-             f"\033[1;31m{self.sys_arch}-{self.user_name}{self.ip_flag}\033[0m: "
-             "\033[93m%(asctime)s\033[0m | %(levelname)s | %(message)s"
+                f"\033[1;31m{self.sys_arch}-{self.user_name}{self.ip_flag}\033[0m: "
+                "\033[93m%(asctime)s\033[0m | %(levelname)s | %(message)s"
             ),
             datefmt=self.date_format,
         )
@@ -304,6 +317,7 @@ class logger(metaclass=Singleton):
         self.logger.addHandler(_fh)
         self.logger.addHandler(fh_error)
         self.logger.addHandler(_ch)
+
     @staticmethod
     def info(message, auteadd=True):
         """info"""
@@ -313,6 +327,7 @@ class logger(metaclass=Singleton):
             current_frame = sys._getframe(1) if hasattr(sys, "_getframe") else None
             message = f"[{current_frame.f_code.co_name}]: {message}"
         logging.info(message)
+
     @staticmethod
     def debug(message, auteadd=True):
         """debug"""
@@ -327,6 +342,7 @@ class logger(metaclass=Singleton):
             logging.info(message)
         else:
             logging.debug(message)
+
     @staticmethod
     def error(message, auteadd=True):
         """error"""
@@ -336,12 +352,14 @@ class logger(metaclass=Singleton):
             current_frame = sys._getframe(1) if hasattr(sys, "_getframe") else None
             message = f"[{current_frame.f_code.co_name}]: {message}"
         logging.error(message)
+
     @staticmethod
     def exception(message):
         """exception"""
         if len(logging.root.handlers) == 0:
             logger(setting.LOG_LEVEL)
         logging.exception(message)
+
     @staticmethod
     def warning(message):
         """warning"""

@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "simplelog"
+name = "funnylog"
 authors = [
   { name="mikigo", email="1964191531@qq.com" },
 ]
@@ -36,14 +36,14 @@ test = [
 doc = ["mkdocs-material"]
 
 [tool.hatch.version]
-path = "simplelog/__version__.py"
+path = "funnylog/__version__.py"
 
 [tool.hatch.build.targets.sdist]
 include = [
-    "/simplelog",
+    "/funnylog",
     "/README.md",
 ]
 
 [project.urls]
-Source = "https://github.com/funny-test/simplelog"
-Documentation = "https://funny-test.github.io/simplelog"
+Source = "https://github.com/funny-test/funnylog"
+Documentation = "https://funny-test.github.io/funnylog"
