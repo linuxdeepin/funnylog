@@ -244,7 +244,7 @@ class logger(metaclass=Singleton):
         """
         # 清空其他日志配置
         logging.root.handlers = []
-        log_path = os.path.join(setting.LOG_PATH, "logs")
+        log_path = os.path.join(setting.LOG_FILE_PATH, "logs")
         if not os.path.exists(log_path):
             os.makedirs(log_path)
         log_path_debug = (
@@ -337,10 +337,13 @@ class logger(metaclass=Singleton):
             current_frame = sys._getframe(1) if hasattr(sys, "_getframe") else None
             message = f"[{current_frame.f_code.co_name}]: {message}"
         # 判断是否用例直接调用底层基础方法，则输出info日志
-        current_frame1 = sys._getframe(2) if hasattr(sys, "_getframe") else None
-        if current_frame1.f_code.co_name.startswith("test_"):
-            logging.info(message)
-        else:
+        try:
+            current_frame1 = sys._getframe(2) if hasattr(sys, "_getframe") else None
+            if current_frame1.f_code.co_name.startswith("test_"):
+                logging.info(message)
+            else:
+                logging.debug(message)
+        except ValueError:
             logging.debug(message)
 
     @staticmethod
