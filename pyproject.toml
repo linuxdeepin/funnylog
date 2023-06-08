@@ -45,5 +45,5 @@ include = [
 ]
 
 [project.urls]
-Source = "https://github.com/funny-test/funnylog"
-Documentation = "https://funny-test.github.io/funnylog"
+Source = "https://github.com/funny-dream/funnylog"
+Documentation = "https://funny-dream.github.io/funnylog"
