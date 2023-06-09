@@ -1,4 +1,4 @@
-# sFunnyLog
+# FunnyLog
 
 一个简单易用、功能强大的日志工具。
 
