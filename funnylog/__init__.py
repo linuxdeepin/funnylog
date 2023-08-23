@@ -265,19 +265,10 @@ class logger(metaclass=Singleton):
             self.ip_flag = f"-{self.ip_end}"
         except IndexError:
             self.ip_flag = ""
-        self.sys_arch = (
-            setting.SYS_ARCH[:7] + "*"
-            if len(setting.SYS_ARCH) > 6
-            else setting.SYS_ARCH
-        )
-        self.user_name = (
-            setting.USERNAME[:7] + "*"
-            if len(setting.USERNAME) > 6
-            else setting.USERNAME
-        )
+        self.sys_arch = setting.SYS_ARCH
         self.date_format = "%m/%d %H:%M:%S"
         self.log_format = (
-            f"{self.sys_arch}-{self.user_name}{self.ip_flag}: "
+            f"{self.sys_arch}{self.ip_flag}: "
             "%(asctime)s | %(levelname)s | %(message)s"
         )
         self.logger = logging.getLogger()
@@ -307,7 +298,7 @@ class logger(metaclass=Singleton):
         # 第五步，定义handler的输出格式
         formatter = _ColoredFormatter(
             (
-                f"\033[1;31m{self.sys_arch}-{self.user_name}{self.ip_flag}\033[0m: "
+                f"\033[1;31m{self.sys_arch}{self.ip_flag}\033[0m: "
                 "\033[93m%(asctime)s\033[0m | %(levelname)s | %(message)s"
             ),
             datefmt=self.date_format,

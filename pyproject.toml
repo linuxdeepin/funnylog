@@ -24,11 +24,6 @@ dependencies = [
 dynamic = ["version"]
 
 [project.optional-dependencies]
-#server = [
-#    "paddlepaddle",
-#    "paddleocr>=2.0.1"
-#]
-
 test = [
     "pytest",
 ]

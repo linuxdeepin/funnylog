@@ -41,8 +41,8 @@ plugins:
 #  - termynal
   - search
 #  - meta
-  - markdownextradata:
-      data: data
+#  - markdownextradata:
+#      data: data
 
 nav:
   - 首页: index.md
