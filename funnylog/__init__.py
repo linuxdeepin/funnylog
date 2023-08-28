@@ -115,7 +115,7 @@ def _trace(func):
                 title = re.split(":param|@param|@return|:return", func.__doc__)[0]
                 title = "".join([ln.strip() for ln in title.split("\n")])
                 params_text = {}
-                # 获取方法的所有参数，并行程，{形参：实参} 的字典
+                # 获取方法的所有参数，并组装为 {形参：实参} 的字典
                 for index, param in enumerate(
                         inspect.signature(func).parameters.values()
                 ):
