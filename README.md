@@ -6,9 +6,9 @@
 
 ---
 
-**Documentation**: <a href="https://funny-dream.github.io/funnylog" target="_blank">https://funny-dream.github.io/funnylog</a>
+**Documentation**: <a href="https://linuxdeepin.github.io/funnylog" target="_blank">https://linuxdeepin.github.io/funnylog</a>
 
-**Source Code**: <a href="https://github.com/funny-dream/funnylog" target="_blank">https://github.com/funny-dream/funnylog</a>
+**Source Code**: <a href="https://github.com/linuxdeepin/funnylog" target="_blank">https://github.com/linuxdeepin/funnylog</a>
 
 ---
 
