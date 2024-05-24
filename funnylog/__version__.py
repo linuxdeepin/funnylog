@@ -6,4 +6,4 @@
 # SPDX-License-Identifier: Apache Software License
 __title__ = "funnylog"
 
-__version__ = "2023.8.23"
+__version__ = "2024.5.24"
